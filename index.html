@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حجز الرحلات</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
+            margin: 20px;
+            background-color: #f0f0f0; /* لون الخلفية */
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        label, input, select {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        #confirmationMessage {
+            display: none;
+            font-size: 24px;
+            color: red;
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="bookingForm">
+        <h2>حجز الرحلات</h2>
+
+        <label for="destination">اختر وجهة السفر:</label>
+        <select id="destination" name="destination" required>
+            <option value="القاهرة">القاهرة</option>
+            <option value="الاسكندرية">الاسكندرية</option>
+            <option value="شرم الشيخ">شرم الشيخ</option>
+            <option value="الغردقة">الغردقة</option>
+            <option value="الأقصر">الأقصر</option>
+            <option value="أسوان">أسوان</option>
+            <option value="مرسى مطروح">مرسى مطروح</option>
+            <option value="دهب">دهب</option>
+        </select>
+
+        <label for="numRooms">عدد الغرف:</label>
+        <input type="number" id="numRooms" name="numRooms" min="1" max="10" required>
+
+        <label for="numBeds">عدد السراير:</label>
+        <input type="number" id="numBeds" name="numBeds" min="1" max="10" required>
+
+        <label for="numPeople">عدد الأفراد:</label>
+        <input type="number" id="numPeople" name="numPeople" min="1" max="20" required>
+
+        <label for="bookingDate">تاريخ الحجز:</label>
+        <input type="date" id="bookingDate" name="bookingDate" required>
+
+        <label for="numDays">عدد أيام الحجز:</label>
+        <input type="number" id="numDays" name="numDays" min="1" required>
+
+        <input type="submit" value="حجز">
+    </form>
+
+    <p id="confirmationMessage"></p>
+
+    <script>
+        document.getElementById("bookingForm").addEventListener("submit", function(event){
+            event.preventDefault();
+
+            var destination = document.getElementById("destination").value;
+            var numRooms = document.getElementById("numRooms").value;
+            var numBeds = document.getElementById("numBeds").value;
+            var numPeople = document.getElementById("numPeople").value;
+            var bookingDate = document.getElementById("bookingDate").value;
+            var numDays = document.getElementById("numDays").value;
+
+            var welcomeMessage = "مرحبا بكم في رحلتنا السياحية!";
+            var confirmationMessage = "تم حجز " + numRooms + " غرفة و " + numBeds + " سرير لعدد " + numPeople + " أفراد" + 
+                                      " في " + destination + " ابتداءً من " + bookingDate + " لمدة " + numDays + " أيام.";
+
+            // إخفاء النموذج وإظهار الرسالة الترحيبية
+            document.getElementById("bookingForm").style.display = "none";
+            document.getElementById("confirmationMessage").style.display = "block";
+            document.getElementById("confirmationMessage").textContent = welcomeMessage;
+
+            setTimeout(function(){
+                document.getElementById("confirmationMessage").textContent = confirmationMessage;
+            }, 2000); // تأخير 2 ثانية قبل عرض رسالة التأكيد
+        });
+    </script>
+
+</body>
+</html>
